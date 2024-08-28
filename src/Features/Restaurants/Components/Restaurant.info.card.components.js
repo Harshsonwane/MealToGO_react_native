@@ -1,45 +1,39 @@
-import React from 'react'
-import { View, Text,StyleSheet } from 'react-native'
+import React from "react";
+import styled from "styled-components/native";
+import { Text, StyleSheet } from "react-native";
 import { Card } from "react-native-paper";
-import styled from 'styled-components/native';
 
-
-//styling here
-
-const Title = styled.Text`
-  padding:16px;
-  backgroundColor:black;
-  color:white;
+const RestaurantCard = styled(Card)`
+  background-color: ${(props) => props.theme.colors.bg.primary};
 `;
 
+const RestaurantCardCover = styled(Card.Cover)`
+  padding: ${(props) => props.theme.space[3]};
+  background-color: ${(props) => props.theme.colors.bg.primary};
+`;
 
-//empty array should be there!!
+const Title = styled(Text)`
+  padding: ${(props) => props.theme.space[3]};
+  color: ${(props) => props.theme.colors.ui.primary};
+`;
+
 export const RestaurantInfoCard = ({ restaurant = {} }) => {
-  
-    const {
-        name = "Some Restaurant",
-        icon,
-        photos = [
-          "https://www.foodiesfeed.com/wp-content/uploads/2019/06/top-view-for-box-of-2-burgers-home-made-600x899.jpg",
-        ],
-        address = "100 some random street",
-        isOpenNow = true,
-        rating = 4,
-        isClosedTemporarily,
-      } = restaurant;
+  const {
+    name = "Some Restaurant",
+    icon,
+    photos = [
+      "https://www.foodiesfeed.com/wp-content/uploads/2019/06/top-view-for-box-of-2-burgers-home-made-600x899.jpg",
+    ],
+    address = "100 some random street",
+    isOpenNow = true,
+    rating = 4,
+    isClosedTemporarily,
+  } = restaurant;
 
-    return (
-        <Card elevation={5} style={styles.card}>
-        <Card.Cover key={name} style={styles.cover} source={{ uri: photos[0] }} />
-        <Title>{name}</Title>
-        </Card>
-  )
-}
-
-const styles = StyleSheet.create({
-    card: { backgroundColor: "white" },
-    cover: { padding: 20, backgroundColor: "white" },
-    title: { padding: 16 },
-  });
-
-export default RestaurantInfoCard;
+  return (
+    <RestaurantCard elevation={5}>
+      <RestaurantCardCover key={name} source={{ uri: photos[0] }} />
+      <Title>{name}</Title>
+    </RestaurantCard>
+  );
+};
